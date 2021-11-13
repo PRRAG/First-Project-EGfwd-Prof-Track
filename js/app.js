@@ -26,13 +26,7 @@
 var frag = document.createDocumentFragment();
 var nav = document.getElementById("navbar__list");
 var findMe = document.querySelectorAll('.landing__container');
-var sections = [
-    document.getElementById('section1'),
-    document.getElementById('section2'),
-    document.getElementById('section3'),
-    document.getElementById('section4'),
-];
-
+var sections = document.querySelectorAll('section');
 /**
  * End Global Variables
  * Start Helper Functions
@@ -46,9 +40,7 @@ var isInViewport = function (elem) {
     var distance = elem.getBoundingClientRect();
     return (
         distance.top >= 0 &&
-        distance.left >= 0 &&
-        distance.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-        distance.right <= (window.innerWidth || document.documentElement.clientWidth)
+        distance.bottom <= (window.innerHeight || document.documentElement.clientHeight)
     );
 };
 
@@ -69,7 +61,7 @@ function buildNav() {
         frag.appendChild(listItem);
     }
     nav.appendChild(frag);
-    
+
 };
 
 
@@ -79,9 +71,9 @@ function setActive() {
     sections.forEach(function (element) {
         window.addEventListener('scroll', function (event) {
             nav.style.display = 'flex';
-            setTimeout(function (){
+            setTimeout(function () {
                 nav.style.display = 'none';
-            },5000);
+            }, 10000);
             if (isInViewport(element)) {
                 element.classList.add("active");
             } else {
@@ -98,15 +90,16 @@ function setActive() {
 function scrollTO() {
     window.onbeforeunload = function () {
         window.scrollTo(0, 0);
-      }
+    }
     var listItem = document.querySelectorAll(".menu__link");
     var i = 0;
     listItem.forEach(function (item) {
         var domRect = sections[i].getBoundingClientRect();
         item.addEventListener('click', function () {
             window.scrollTo({
-                top: domRect.y,
-                left: 0,
+                y: domRect.y,
+                top: domRect.top,
+                x: domRect.x,
                 behavior: 'smooth'
             });
         });
