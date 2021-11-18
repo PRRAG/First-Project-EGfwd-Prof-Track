@@ -41,7 +41,7 @@ const isInViewport = function (elem) {
     let distance = elem.getBoundingClientRect();
     return (
         distance.top >= 0 &&
-        distance.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+        distance.bottom <= (window.innerHeight + distance.height - 200 || document.documentElement.clientHeight + distance.height)
     );
 };
 
@@ -82,7 +82,7 @@ function setActive() {
                 navItem[i].className = "menu__link";
             }
         }
-    },false);
+    }, false);
 
 };
 
@@ -95,19 +95,13 @@ function scrollTO() {
         window.scrollTo(0, 0);
     }
     let listItem = document.querySelectorAll(".menu__link");
-    let i = 0;
-    listItem.forEach(function (item) {
-        let domRect = sections[i].getBoundingClientRect();
-        item.addEventListener('click', function () {
-            window.scrollTo({
-                y: domRect.y,
-                top: domRect.top,
-                x: domRect.x,
-                behavior: 'smooth'
-            });
+    for (let i = 0; i < sections.length; i++) {
+
+        listItem[i].addEventListener('click', function () {
+            sections[i].scrollIntoView({ behavior: "smooth" });
+            
         });
-        i++;
-    });
+    }
 };
 
 

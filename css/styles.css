@@ -26,10 +26,18 @@ h1 {
     margin: 2em 1rem;
 }
 
-@media only screen and (min-width: 35em){
+@media screen and (min-width:600px){
     h1 {
         font-size: 7em;
         margin: 2em 4rem 1em;
+    }
+    
+}
+
+@media only screen and (max-width: 600px){
+    section.active {
+        max-width: 99%;
+        padding: 1em;
     }
 }
 
@@ -76,7 +84,7 @@ section {
 
 .navbar__menu li {
     display: inline-block;
-    padding: 10;
+    cursor: pointer;
     font-size:clamp(14px, 1vw, 20px);
 }
 
@@ -130,12 +138,15 @@ section {
     text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+
+@media only screen and (min-width: 601px){
     .landing__container {
         max-width: 50em;
         padding: 4em;
     }
+
 }
+
 
 section:nth-of-type(even) .landing__container {
     margin-right: 0;
